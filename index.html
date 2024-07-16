@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Countdown Calendar</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="day-mode">
+    <div class="container">
+        <h1>Exam Countdown Calendar</h1>
+        
+        <div class="calendar-container">
+            <!-- Calendar -->
+            <div class="calendar-controls">
+                <button id="prevMonth">Previous</button>
+                <h2 id="currentMonth"></h2>
+                <button id="nextMonth">Next</button>
+                <button id="toggleMode">Night Mode</button>
+            </div>
+            <div class="calendar" id="calendar"></div>
+
+            <!-- Countdown Box -->
+            <div class="countdown-box" id="countdown-box">
+                <h2>Upcoming Exams</h2>
+                <ul id="countdown-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Designed by Bishnutej</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
