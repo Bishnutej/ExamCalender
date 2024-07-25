@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const exams = {
         'RRB PO': {
-            prelims: [new Date(2024, 7, 3), new Date(2024, 7, 4), new Date(2024, 7, 10)],
+            prelims: [new Date(2024, 7, 3)],
             mains: new Date(2024, 8, 29)
         },
         'IBPS Clerk': {
