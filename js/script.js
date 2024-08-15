@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mains: new Date(2024, 8, 29)
         },
         'IBPS Clerk': {
-            prelims: [new Date(2024, 7, 24), new Date(2024, 7, 25), new Date(2024, 7, 31)],
+            prelims: [new Date(2024, 7, 24)],
             mains: new Date(2024, 9, 13)
         },
         'IBPS PO': {
