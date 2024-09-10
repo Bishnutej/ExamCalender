@@ -1,249 +1,97 @@
-/* Common Styles */
+/* styles.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
-
-h1 {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
     text-align: center;
 }
 
 .calendar-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .calendar-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     margin-bottom: 10px;
+}
+
+.calendars {
+    display: flex;
+    flex-direction: column; /* Arrange calendars vertically */
+    align-items: center;
+    gap: 20px;
 }
 
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    width: 70%;
-    margin-bottom: 20px;
-}
-
-.calendar .day-of-week,
-.calendar .day {
+    gap: 5px;
+    width: 100%;
+    max-width: 350px;
+    border: 1px solid #ddd;
     padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    position: relative;
+    border-radius: 5px;
 }
 
-.calendar .day-of-week {
-    background-color: #f0f0f0;
+.day-of-week {
     font-weight: bold;
+    text-align: center;
 }
 
-.calendar .day.exam-day-rrb-prelims {
-    background-color: #98FB98;
+.day {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-.calendar .day.exam-day-rrb-mains {
-    background-color: #006400;
-    color: white;
+.current-day {
+    background-color: yellow;
+    border-radius: 50%;
 }
 
-.calendar .day.exam-day-clerk-prelims {
-    background-color: #f1f181;
+.exam-day-rrb-prelims,
+.exam-day-clerk-prelims,
+.exam-day-po-prelims {
+    background-color: lightcoral;
 }
 
-.calendar .day.exam-day-clerk-mains {
-    background-color: #FFD700;
-    color: white;
-}
-
-.calendar .day.exam-day-po-prelims {
-    background-color: #FFA07A;
-}
-
-.calendar .day.exam-day-po-mains {
-    background-color: #FF4500;
-    color: white;
-}
-
-.calendar .day.attended {
-    background-color: #4caf50;
-    color: white;
-}
-
-.calendar .day.crossed {
-    text-decoration: line-through;
+.exam-day-rrb-mains,
+.exam-day-clerk-mains,
+.exam-day-po-mains {
+    background-color: lightseagreen;
 }
 
 .countdown-box {
-    width: 25%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: left;
 }
 
-.countdown-box h2 {
-    text-align: center;
+.night-mode {
+    background-color: #333;
+    color: #fff;
 }
 
-.countdown-box ul {
-    list-style-type: none;
-    padding: 0;
+.night-mode .calendar {
+    border-color: #666;
 }
 
-.countdown-box ul li {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-.countdown-box ul li.rrb-po-prelims {
-    background-color: #98FB98;
-}
-
-.countdown-box ul li.rrb-po-mains {
-    background-color: #006400;
-    color: white;
-}
-
-.countdown-box ul li.ibps-clerk-prelims {
-    background-color: #f1f181;
-}
-
-.countdown-box ul li.ibps-clerk-mains {
-    background-color: #FFD700;
-    color: white;
-}
-
-.countdown-box ul li.ibps-po-prelims {
-    background-color: #FFA07A;
-}
-
-.countdown-box ul li.ibps-po-mains {
-    background-color: #FF4500;
-    color: white;
+.night-mode .day {
+    border-color: #666;
 }
 
 footer {
     text-align: center;
-    padding: 10px 0;
-    background-color: #f0f0f0;
     margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-    .calendar-container {
-        flex-direction: column;
-    }
-
-    .calendar {
-        width: 100%;
-    }
-
-    .countdown-box {
-        width: 100%;
-    }
-
-    footer {
-        position: static;
-    }
-}
-
-/* Day Mode Styles */
-body.day-mode {
-    background-color: white;
-    color: black;
-}
-
-body.day-mode .calendar .day-of-week,
-body.day-mode .calendar .day {
-    border-color: #ccc;
-}
-
-/* Night Mode Styles */
-body.night-mode {
-    background-color: #121212;
-    color: white;
-}
-
-body.night-mode .calendar .day-of-week {
-    background-color: #333;
-    border-color: #444;
-}
-
-body.night-mode .calendar .day {
-    border-color: #444;
-}
-
-body.night-mode .calendar .day.exam-day-rrb-prelims {
-    background-color: #66CDAA;
-}
-
-body.night-mode .calendar .day.exam-day-rrb-mains {
-    background-color: #006400;
-    color: white;
-}
-
-body.night-mode .calendar .day.exam-day-clerk-prelims {
-    background-color: #f1f181;
-}
-
-body.night-mode .calendar .day.exam-day-clerk-mains {
-    background-color: #FFD700;
-    color: white;
-}
-
-body.night-mode .calendar .day.exam-day-po-prelims {
-    background-color: #FF8C69;
-}
-
-body.night-mode .calendar .day.exam-day-po-mains {
-    background-color: #FF4500;
-    color: white;
-}
-
-body.night-mode .countdown-box {
-    border-color: #444;
-}
-
-body.night-mode .countdown-box ul li {
-    border-color: #444;
-}
-/* Add this style to highlight current day with a circle */
-.day.current-day {
-    position: relative;
-}
-
-/* Circle highlight for current day */
-.day.current-day {
-    position: relative;
-}
-
-.day.current-day::after {
-    content: '';
-    display: block;
-    width: 10px;
-    height: 10px;
-    background-color: rgb(68, 142, 238); /* Adjust color as needed */
-    border-radius: 50%;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
-
-/* Cross out past dates */
-.day.crossed {
-    text-decoration: line-through;
+    font-size: 0.8em;
+    color: #888;
 }
