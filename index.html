@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +9,26 @@
 <body class="day-mode">
     <div class="container">
         <h1>Exam Countdown Calendar</h1>
-        
-        <div class="calendar-container">
-            <!-- Calendar -->
-            <div class="calendar-controls">
-                <button id="prevMonth">Previous</button>
-                <h2 id="currentMonth"></h2>
-                <button id="nextMonth">Next</button>
-                <button id="toggleMode">Night Mode</button>
-            </div>
-            <div class="calendar" id="calendar"></div>
 
+        <button id="toggle-mode" class="toggle-mode">Switch to Night Mode</button>
+
+        <div class="calendar-container">
             <!-- Countdown Box -->
             <div class="countdown-box" id="countdown-box">
                 <h2>Upcoming Exams</h2>
                 <ul id="countdown-list"></ul>
+            </div>
+
+            <!-- Calendar -->
+            <div class="calendars">
+                <div class="month-calendar">
+                    <div class="month-nav">
+                        <button id="prevMonth" class="month-arrow">←</button>
+                        <h2 id="currentMonth1"></h2>
+                        <button id="nextMonth" class="month-arrow">→</button>
+                    </div>
+                    <div class="calendar" id="calendar1"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,6 +40,3 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-
-
-
