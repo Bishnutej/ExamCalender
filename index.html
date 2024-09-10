@@ -11,25 +11,24 @@
         <h1>Exam Countdown Calendar</h1>
         
         <div class="calendar-container">
-            <!-- Calendar Controls -->
-            <div class="calendar-controls">
-                <button id="prevMonth">Previous</button>
-                <h2 id="currentMonth"></h2>
-                <h2 id="nextMonthTitle"></h2>
-                <button id="nextMonth">Next</button>
-                <button id="toggleMode">Night Mode</button>
-            </div>
-
-            <!-- Two Month Calendars Vertically -->
-            <div class="calendars">
-                <div class="calendar" id="calendar1"></div>
-                <div class="calendar" id="calendar2"></div>
-            </div>
-
-            <!-- Countdown Box -->
+            <!-- Upcoming Exams List -->
             <div class="countdown-box" id="countdown-box">
                 <h2>Upcoming Exams</h2>
                 <ul id="countdown-list"></ul>
+            </div>
+
+            <!-- Two Month Calendars on the Right -->
+            <div class="calendars">
+                <!-- Calendar 1 -->
+                <div class="calendar-wrapper">
+                    <h2 id="currentMonth"></h2>
+                    <div class="calendar" id="calendar1"></div>
+                </div>
+                <!-- Calendar 2 -->
+                <div class="calendar-wrapper">
+                    <h2 id="nextMonthTitle"></h2>
+                    <div class="calendar" id="calendar2"></div>
+                </div>
             </div>
         </div>
     </div>
