@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const calendar = document.getElementById('calendar');
+    const calendar1 = document.getElementById('calendar1');
     const countdownList = document.getElementById('countdown-list');
-    const currentMonthElement = document.getElementById('currentMonth');
-    const toggleModeButton = document.getElementById('toggleMode');
+    const currentMonthElement1 = document.getElementById('currentMonth1');
+    const toggleModeBtn = document.getElementById('toggle-mode');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
     const now = new Date();
     let currentMonth = now.getMonth();
     let currentYear = now.getFullYear();
@@ -22,11 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    function updateCalendar() {
-        const monthName = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' });
-        currentMonthElement.innerText = `${monthName} ${currentYear}`;
-
-        calendar.innerHTML = '';
+    function updateCalendar(month, year, calendarElement, monthElement) {
+        const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+        monthElement.innerText = `${monthName} ${year}`;
+        calendarElement.innerHTML = '';
 
         // Add days of the week
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -34,21 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const dayElement = document.createElement('div');
             dayElement.classList.add('day-of-week');
             dayElement.innerText = day;
-            calendar.appendChild(dayElement);
+            calendarElement.appendChild(dayElement);
         });
 
         // Add empty days to align the first day of the month correctly
-        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
         for (let i = 0; i < firstDayOfMonth; i++) {
             const emptyDay = document.createElement('div');
             emptyDay.classList.add('day');
-            calendar.appendChild(emptyDay);
+            calendarElement.appendChild(emptyDay);
         }
 
         // Add days of the month
-        const monthDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const monthDays = new Date(year, month + 1, 0).getDate();
         for (let day = 1; day <= monthDays; day++) {
-            const date = new Date(currentYear, currentMonth, day);
+            const date = new Date(year, month, day);
             const dayElement = document.createElement('div');
             dayElement.classList.add('day');
 
@@ -62,13 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const prelimsDates = exams[exam].prelims;
                 prelimsDates.forEach(prelimsDate => {
                     if (date.toDateString() === prelimsDate.toDateString()) {
-                        if (exam === 'RRB PO') {
-                            dayElement.classList.add('exam-day-rrb-prelims');
-                        } else if (exam === 'IBPS Clerk') {
-                            dayElement.classList.add('exam-day-clerk-prelims');
-                        } else if (exam === 'IBPS PO') {
-                            dayElement.classList.add('exam-day-po-prelims');
-                        }
+                        dayElement.classList.add(`exam-day-${exam.toLowerCase().replace(/\s+/g, '-')}-prelims`);
                         dayElement.innerHTML = `${day}<br>${exam}<br>Prelims`;
                         marked = true;
                     }
@@ -76,13 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const mainsDate = exams[exam].mains;
                 if (date.toDateString() === mainsDate.toDateString()) {
-                    if (exam === 'RRB PO') {
-                        dayElement.classList.add('exam-day-rrb-mains');
-                    } else if (exam === 'IBPS Clerk') {
-                        dayElement.classList.add('exam-day-clerk-mains');
-                    } else if (exam === 'IBPS PO') {
-                        dayElement.classList.add('exam-day-po-mains');
-                    }
+                    dayElement.classList.add(`exam-day-${exam.toLowerCase().replace(/\s+/g, '-')}-mains`);
                     dayElement.innerHTML = `${day}<br>${exam}<br>Mains`;
                     marked = true;
                 }
@@ -92,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayElement.innerHTML = day;
             }
 
-            calendar.appendChild(dayElement);
+            calendarElement.appendChild(dayElement);
         }
     }
 
@@ -121,56 +110,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
         upcomingExams.forEach(exam => {
             const listItem = document.createElement('li');
-            if (exam.exam === 'RRB PO' && exam.stage === 'Prelims') {
-                listItem.classList.add('rrb-po-prelims');
-            } else if (exam.exam === 'RRB PO' && exam.stage === 'Mains') {
-                listItem.classList.add('rrb-po-mains');
-            } else if (exam.exam === 'IBPS Clerk' && exam.stage === 'Prelims') {
-                listItem.classList.add('ibps-clerk-prelims');
-            } else if (exam.exam === 'IBPS Clerk' && exam.stage === 'Mains') {
-                listItem.classList.add('ibps-clerk-mains');
-            } else if (exam.exam === 'IBPS PO' && exam.stage === 'Prelims') {
-                listItem.classList.add('ibps-po-prelims');
-            } else if (exam.exam === 'IBPS PO' && exam.stage === 'Mains') {
-                listItem.classList.add('ibps-po-mains');
-            }
-
+            listItem.classList.add(`exam-${exam.exam.toLowerCase().replace(/\s+/g, '-')}-${exam.stage.toLowerCase()}`);
             listItem.innerHTML = `${exam.exam} ${exam.stage}<br>${exam.date.toDateString()}<br>${exam.days} days remaining`;
             countdownList.appendChild(listItem);
         });
     }
 
-    document.getElementById('prevMonth').addEventListener('click', () => {
+    function toggleMode() {
+        document.body.classList.toggle('night-mode');
+        toggleModeBtn.innerText = document.body.classList.contains('night-mode') ? 'Switch to Day Mode' : 'Switch to Night Mode';
+    }
+
+    toggleModeBtn.addEventListener('click', toggleMode);
+
+    prevMonthBtn.addEventListener('click', () => {
         currentMonth--;
         if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
         }
-        updateCalendar();
+        updateCalendar(currentMonth, currentYear, calendar1, currentMonthElement1);
     });
 
-    document.getElementById('nextMonth').addEventListener('click', () => {
+    nextMonthBtn.addEventListener('click', () => {
         currentMonth++;
         if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
         }
-        updateCalendar();
+        updateCalendar(currentMonth, currentYear, calendar1, currentMonthElement1);
     });
 
-    toggleModeButton.addEventListener('click', () => {
-        const body = document.body;
-        if (body.classList.contains('day-mode')) {
-            body.classList.remove('day-mode');
-            body.classList.add('night-mode');
-            toggleModeButton.textContent = 'Day Mode';
-        } else {
-            body.classList.remove('night-mode');
-            body.classList.add('day-mode');
-            toggleModeButton.textContent = 'Night Mode';
-        }
-    });
-
-    updateCalendar();
+    updateCalendar(currentMonth, currentYear, calendar1, currentMonthElement1);
     updateCountdown();
 });
