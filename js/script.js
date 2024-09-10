@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const calendar1 = document.getElementById('calendar1');
-    const calendar2 = document.getElementById('calendar2');
+    const calendar = document.getElementById('calendar');
     const countdownList = document.getElementById('countdown-list');
     const currentMonthElement = document.getElementById('currentMonth');
-    const nextMonthTitleElement = document.getElementById('nextMonthTitle');
     const toggleModeButton = document.getElementById('toggleMode');
     const now = new Date();
     let currentMonth = now.getMonth();
@@ -25,45 +23,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateCalendar() {
-        // Current Month
-        const monthName1 = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' });
-        currentMonthElement.innerText = `${monthName1} ${currentYear}`;
-        calendar1.innerHTML = '';
+        const monthName = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' });
+        currentMonthElement.innerText = `${monthName} ${currentYear}`;
 
-        // Next Month
-        const nextMonth = (currentMonth + 1) % 12;
-        const nextYear = nextMonth === 0 ? currentYear + 1 : currentYear;
-        const monthName2 = new Date(nextYear, nextMonth).toLocaleString('default', { month: 'long' });
-        nextMonthTitleElement.innerText = `${monthName2} ${nextYear}`;
-        calendar2.innerHTML = '';
+        calendar.innerHTML = '';
 
-        // Render both months
-        renderMonth(calendar1, currentMonth, currentYear);
-        renderMonth(calendar2, nextMonth, nextYear);
-    }
-
-    function renderMonth(calendarElement, month, year) {
         // Add days of the week
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         daysOfWeek.forEach(day => {
             const dayElement = document.createElement('div');
             dayElement.classList.add('day-of-week');
             dayElement.innerText = day;
-            calendarElement.appendChild(dayElement);
+            calendar.appendChild(dayElement);
         });
 
         // Add empty days to align the first day of the month correctly
-        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
         for (let i = 0; i < firstDayOfMonth; i++) {
             const emptyDay = document.createElement('div');
             emptyDay.classList.add('day');
-            calendarElement.appendChild(emptyDay);
+            calendar.appendChild(emptyDay);
         }
 
         // Add days of the month
-        const monthDays = new Date(year, month + 1, 0).getDate();
+        const monthDays = new Date(currentYear, currentMonth + 1, 0).getDate();
         for (let day = 1; day <= monthDays; day++) {
-            const date = new Date(year, month, day);
+            const date = new Date(currentYear, currentMonth, day);
             const dayElement = document.createElement('div');
             dayElement.classList.add('day');
 
@@ -107,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dayElement.innerHTML = day;
             }
 
-            calendarElement.appendChild(dayElement);
+            calendar.appendChild(dayElement);
         }
     }
 
@@ -174,7 +159,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     toggleModeButton.addEventListener('click', () => {
-        document.body.classList.toggle('night-mode');
+        const body = document.body;
+        if (body.classList.contains('day-mode')) {
+            body.classList.remove('day-mode');
+            body.classList.add('night-mode');
+            toggleModeButton.textContent = 'Day Mode';
+        } else {
+            body.classList.remove('night-mode');
+            body.classList.add('day-mode');
+            toggleModeButton.textContent = 'Night Mode';
+        }
     });
 
     updateCalendar();
