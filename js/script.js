@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const exams = {
         'RRB PO': {
             prelims: [new Date(2024, 7, 3)]
-            
+            mains: new Date(0, 0, 0)
         },
         'IBPS Clerk': {
             prelims: [new Date(2024, 7, 24)],
