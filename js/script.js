@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const exams = {
         'RRB PO': {
-            prelims: [new Date(2024, 7, 3)],
-            mains: new Date(2024, 8, 29)
+            prelims: [new Date(2024, 7, 3)]
+            
         },
         'IBPS Clerk': {
             prelims: [new Date(2024, 7, 24)],
