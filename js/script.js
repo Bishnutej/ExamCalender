@@ -10,10 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentYear = now.getFullYear();
 
     const exams = {
-        'IBPS Clerk': {
-            prelims: [new Date(2024, 7, 24)],
-            mains: new Date(2024, 9, 13)
-        },
         'IBPS PO': {
             prelims: [new Date(2024, 9, 19), new Date(2024, 9, 20)],
             mains: new Date(2024, 10, 30)
