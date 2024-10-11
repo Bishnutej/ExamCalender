@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const exams = {
         'IBPS PO': {
-            prelims: [new Date(2024, 9, 19), new Date(2024, 9, 20)],
+            prelims: [new Date(2024, 9, 19)],
             mains: new Date(2024, 10, 30)
         }
     };
